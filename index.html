@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartopia on Steam</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="page">
+
+<!-- HEADER -->
+<header class="header main-nav">
+    <div class="header__container nav-container">
+        <div class="header__logo-container" style="background-image: url('img/logo-steam.png');" role="img" aria-label="Steam Logo"></div>
+
+        <!-- Links Principales -->
+        <nav class="header__menu menu-links">
+            <a href="#" class="header__link header__link--active">STORE</a>
+            <a href="#" class="header__link">COMMUNITY</a>
+            <a href="#" class="header__link">ABOUT</a>
+            <a href="#" class="header__link">SUPPORT</a>
+        </nav>
+
+        <!-- Área Derecha -->
+        <div class="header__right right-nav">
+            <div class="search-box">
+                <input type="text" class="search-box__input" placeholder="Search the store">
+                <button type="submit" class="search-box__submit">&num;</button>
+            </div>
+            <button class="cart-btn" id="cartToggle">
+                <div class="cart-btn__icon-container" style="background-image: url('img/shopping-cart.png');" role="img" aria-label="Cart"></div>
+                <span class="cart-count">0</span>
+            </button>
+            <button class="install-btn">Install Steam</button>
+            <a href="#" class="login-link">Sign in</a>
+        </div>
+    </div>
+</header>
+
+<!-- MENÚ LATERAL DEL CARRITO -->
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar__header cart-header">
+        <h3 class="cart-sidebar__title">Your Shopping Cart</h3>
+        <button class="cart-sidebar__close close-cart" id="closeCart">&times;</button>
+    </div>
+    <div class="cart-sidebar__items cart-items" id="cartItemsContainer">
+        <p class="cart-sidebar__empty empty-cart-msg">Your cart is empty.</p>
+    </div>
+    <div class="cart-sidebar__footer cart-footer">
+        <div class="cart-sidebar__total-row cart-total">
+            <span>Total:</span>
+            <span id="cartTotalPrice">$0.00</span>
+        </div>
+        <button class="cart-sidebar__checkout checkout-btn">Checkout</button>
+    </div>
+</div>
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<!-- MAIN -->
+<main class="main main-container">
+    <!-- Breadcrumbs & Title -->
+    <div class="game-header-area">
+        <div class="breadcrumbs">
+            All Games > Free To Play Games > Heartopia
+        </div>
+        <h1 class="main__title">Heartopia</h1>
+        <a href="#" class="community-hub-btn">Community Hub</a>
+    </div>
+
+    <!-- SECCIÓN PRINCIPAL -->
+    <div class="steam-grid-layout">
+        
+        <!-- Galería y Acerca del juego -->
+        <div class="left-column">
+            
+            <!-- Galería -->
+            <div class="media-gallery">
+                <div class="main-viewer">
+                    <div class="main-viewer__bg" style="background-image: url('img/header.png');" id="mainViewerImg" role="img" aria-label="Heartopia Main Trailer"></div>
+                </div>
+                <div class="thumbnails-container">
+                    <div class="thumb thumb--active" onclick="changeMedia('img/header.png')">
+                        <div class="thumb__bg" style="background-image: url('img/header.png');" role="img" aria-label="Thumb 1"></div>
+                    </div>
+                    <div class="thumb" onclick="changeMedia('img/outfits.png')">
+                        <div class="thumb__bg" style="background-image: url('img/outfits.png');" role="img" aria-label="Thumb 2"></div>
+                    </div>
+                    <div class="thumb" onclick="changeMedia('img/building.png')">
+                        <div class="thumb__bg" style="background-image: url('img/building.png');" role="img" aria-label="Thumb 3"></div>
+                    </div>
+                    <div class="thumb" onclick="changeMedia('img/magic-wand.png')">
+                        <div class="thumb__bg" style="background-image: url('img/magic-wand.png');" role="img" aria-label="Thumb 4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acerca del juego -->
+            <section class="about-game-box">
+                <h3>About This Game</h3>
+                <p>Welcome to Heartopia, a multiplayer life simulation game crafted for creativity, freedom, and peace. Build your dream home, explore a wide range of hobbies, and forge warm connections with friends in a town full of endless possibilities.</p>
+                <p>Customize your outfits, plant vibrant gardens, design cozy interiors, and take part in seasonal community events together with players from all around the world.</p>
+            </section>
+
+            <!-- Requisitos del sistema -->
+            <section class="system-requirements">
+                <h3>System Requirements</h3>
+                <div class="req-grid">
+                    <div class="req-column">
+                        <h4>MINIMUM:</h4>
+                        <p><strong>OS:</strong> Windows 10 64-bit</p>
+                        <p><strong>Processor:</strong> Intel Core i5</p>
+                        <p><strong>Memory:</strong> 8 GB RAM</p>
+                        <p><strong>Graphics:</strong> NVIDIA GTX 960</p>
+                    </div>
+                    <div class="req-column">
+                        <h4>RECOMMENDED:</h4>
+                        <p><strong>OS:</strong> Windows 11 64-bit</p>
+                        <p><strong>Processor:</strong> Intel Core i7</p>
+                        <p><strong>Memory:</strong> 16 GB RAM</p>
+                        <p><strong>Graphics:</strong> NVIDIA RTX 2060</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Panel de compra principal -->
+        <div class="right-column">
+            
+            <div class="store-box-right">
+                <div class="store-box-right__capsule" style="background-image: url('img/header-alt.png');" role="img" aria-label="Heartopia Capsule"></div>
+                <p class="right-short-desc">Welcome to Heartopia, a multiplayer life simulation game crafted for creativity, freedom, and peace.</p>
+                
+                <div class="meta-row">
+                    <span>RECENT REVIEWS:</span>
+                    <span class="review-positive">Mostly Positive (536)</span>
+                </div>
+                <div class="meta-row">
+                    <span>ALL REVIEWS:</span>
+                    <span class="review-mixed">Mixed (7,950)</span>
+                </div>
+                <div class="meta-row">
+                    <span>RELEASE DATE:</span>
+                    <span>16 Jan, 2026</span>
+                </div>
+                <div class="meta-row">
+                    <span>DEVELOPER:</span>
+                    <span class="blue-link">XD</span>
+                </div>
+                <div class="meta-row">
+                    <span>PUBLISHER:</span>
+                    <span class="blue-link">XD</span>
+                </div>
+
+                <div class="tags-box-sidebar">
+                    <h4>Popular user-defined tags for this product:</h4>
+                    <div class="tags-flex">
+                        <span class="tag">Free to Play</span>
+                        <span class="tag">Life Sim</span>
+                        <span class="tag">Multiplayer</span>
+                        <span class="tag">Artificial Intelligence</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Mini tienda interna -->
+    <section class="dlc-store-section">
+        <h3>Content For This Game</h3>
+        <div class="dlc-grid">
+            
+            <!-- Tarjeta DLC 1 -->
+            <div class="dlc-card">
+                <div class="dlc-card__image" style="background-image: url('img/cozy-garden.png');" role="img" aria-label="Cozy Garden Pack"></div>
+                <div class="dlc-info">
+                    <h4>Heartopia - Cozy Garden Pack</h4>
+                    <span class="dlc-price">$4.99</span>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Heartopia - Cozy Garden Pack', 4.99)">Add to Cart</button>
+            </div>
+
+            <!-- Tarjeta DLC 2 -->
+            <div class="dlc-card">
+                <div class="dlc-card__image" style="background-image: url('img/friends-selfie.png');" role="img" aria-label="VIP Friends Bundle"></div>
+                <div class="dlc-info">
+                    <h4>Heartopia - VIP Friends Bundle</h4>
+                    <span class="dlc-price">$9.99</span>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Heartopia - VIP Friends Bundle', 9.99)">Add to Cart</button>
+            </div>
+
+            <!-- Tarjeta DLC 3 -->
+            <div class="dlc-card">
+                <div class="dlc-card__image" style="background-image: url('img/live-steam.png');" role="img" aria-label="Soundtrack & Artbook"></div>
+                <div class="dlc-info">
+                    <h4>Heartopia - Soundtrack & Artbook</h4>
+                    <span class="dlc-price">$2.99</span>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart('Heartopia - Soundtrack & Artbook', 2.99)">Add to Cart</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Play Section Principal -->
+    <section class="play-section">
+        <h2>Play Heartopia</h2>
+        <div class="play-bar">
+            <p>Free To Play</p>
+            <button class="play-game" onclick="addToCart('Heartopia (Base Game)', 0.00)">Play Game</button>
+        </div>
+    </section>
+
+    <!-- Noticias -->
+    <section class="news">
+        <h3>RECENT EVENTS & ANNOUNCEMENTS</h3>
+        
+        <article class="news-item">
+            <div class="news-item__image" style="background-image: url('img/lets-build.png');" role="img" aria-label="Dreamy Life in a Cozy Town"></div>
+            <div class="news-text">
+                <h4>Heartopia is Now Live on Steam!</h4>
+                <p>Fri, January 16, 2026</p>
+            </div>
+        </article>
+
+        <article class="news-item">
+            <div class="news-item__image" style="background-image: url('img/lets-decorate.png');" role="img" aria-label="Friends Selfie"></div>
+            <div class="news-text">
+                <h4>Heartopia Community Update & Steam Release Notice</h4>
+                <p>Wed, January 7, 2026</p>
+            </div>
+        </article>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>&copy; 2026 Valve Corporation. &reg; All rights reserved. &num;Heartopia</p>
+</footer>
+
+<!-- GALERÍA Y CARRITO LATERAL -->
+<script>
+    function changeMedia(imageSrc) {
+        document.getElementById('mainViewerImg').style.backgroundImage = `url('${imageSrc}')`;
+        const thumbs = document.querySelectorAll('.thumb');
+        thumbs.forEach(t => t.classList.remove('thumb--active'));
+        event.currentTarget.classList.add('thumb--active');
+    }
+
+    const cartToggle = document.getElementById('cartToggle');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const closeCart = document.getElementById('closeCart');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartTotalPrice = document.getElementById('cartTotalPrice');
+    const cartCountBadge = document.querySelector('.cart-count');
+
+    let cart = [];
+
+    cartToggle.addEventListener('click', () => {
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.add('open');
+    });
+
+    closeCart.addEventListener('click', () => {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('open');
+    });
+
+    cartOverlay.addEventListener('click', () => {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('open');
+    });
+
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        updateCartUI();
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.add('open');
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        cartCountBadge.textContent = cart.length;
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
+            cartTotalPrice.textContent = '$0.00';
+            return;
+        }
+
+        let html = '';
+        let total = 0;
+        cart.forEach((item, index) => {
+            total += item.price;
+            html += `
+                <div class="cart-item-row">
+                    <div>
+                        <p class="cart-item-title">${item.name}</p>
+                        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <button class="remove-item-btn" onclick="removeFromCart(${index})">&times;</button>
+                </div>
+            `;
+        });
+        cartItemsContainer.innerHTML = html;
+        cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+    }
+</script>
+</body>
+</html>
