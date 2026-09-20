@@ -1,0 +1,738 @@
+// VARIABLES
+$bg-dark: #1b2838;
+$bg-darker: #171a21;
+$bg-card: #16202d;
+$bg-secondary: #2a475e;
+$bg-accent: #316282;
+
+$color-primary: #ffffff;
+$color-text-secondary: #c6d4df;
+$color-text-muted: #8f98a0;
+
+$color-blue-link: #1a9fff;
+$color-cyan: #67c1f5;
+$color-green-btn: #75b022;
+$color-green-hover: #91ce3b;
+$color-danger: #ff4d4d;
+$color-review-positive: #66c0f4;
+$color-review-mixed: #b0ae28;
+
+$font-family-base: "Lexend", sans-serif;
+$max-width-container: 980px;
+$radius-sm: 2px;
+$radius-md: 4px;
+
+// MIXINS
+@mixin flex-layout($justify: space-between,$align: center, $direction: row,$gap: 0px) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+@mixin btn-green($padding: 6px 14px,$width: auto) {
+  background-color: $color-green-btn;
+  color: $color-primary;
+  border: none;
+  padding: $padding;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-weight: 500;
+  width: $width;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $color-green-hover;
+  }
+}
+
+@mixin btn-secondary($bg:$bg-secondary, $color:$color-primary) {
+  background-color: $bg;
+  color: $color;
+  border: none;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: background-color 0.2s ease;
+}
+
+// EXTENDS
+%card-box {
+  background-color: $bg-card;
+  padding: 20px;
+  border-radius: $radius-md;
+}
+
+%section-title {
+  color: $color-primary;
+  font-size: 16px;
+  border-bottom: 1px solid $bg-secondary;
+  padding-bottom: 8px;
+  margin-top: 0;
+}
+
+%bg-cover-center {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// RESET
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: $bg-dark;
+  color: $color-text-secondary;
+  font-family: $font-family-base;
+  font-weight: 300;
+}
+
+// HEADER Y NAV
+header.main-nav {
+  background-color: $bg-darker;
+  padding: 0 30px;
+  height: 70px;
+  @include flex-layout(space-between, center);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .nav-container {
+    width: 100%;
+    @include flex-layout(space-between, center, row, 15px);
+  }
+
+  .header__logo-container {
+    width: 120px;
+    height: 35px;
+    @extend %bg-cover-center;
+  }
+
+  .menu-links {
+    display: flex;
+    gap: 15px;
+  }
+
+  .header__link {
+    color: #dcdedf;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 5px 0;
+
+    &--active {
+      color: $color-blue-link;
+      border-bottom: 2px solid $color-blue-link;
+    }
+  }
+
+  .right-nav {
+    @include flex-layout(flex-end, center, row, 10px);
+  }
+}
+
+// Boton menu hamburguesa
+.left-menu-toggle {
+  background: transparent;
+  border: none;
+  color: $color-text-secondary;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+// Buscador
+.search-box {
+  background-color: $bg-accent;
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 3px;
+  align-items: center;
+
+  &__input {
+    background: transparent;
+    border: none;
+    color: $color-primary;
+    outline: none;
+    font-family: $font-family-base;
+    font-size: 13px;
+  }
+
+  &__submit {
+    background: transparent;
+    border: none;
+    color: $color-primary;
+    cursor: pointer;
+  }
+}
+
+// Carrito boton
+.cart-btn {
+  @include btn-secondary($bg-secondary);
+  padding: 6px 10px;
+  @include flex-layout(center, center, row, 6px);
+  position: relative;
+
+  &__icon-container {
+    width: 18px;
+    height: 18px;
+    @extend %bg-cover-center;
+  }
+}
+
+.cart-count {
+  background-color: $color-cyan;
+  color: $bg-dark;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+
+.install-btn {
+  @include btn-green(6px 14px);
+  font-size: 13px;
+}
+
+.login-link {
+  color: #dcdedf;
+  text-decoration: none;
+  font-size: 13px;
+  text-transform: lowercase;
+}
+
+// MENUS LATERALES Y OVERLAY
+.left-sidebar, .cart-sidebar {
+  position: fixed;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background-color: $bg-darker;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  @include flex-layout(stretch, stretch, column);
+}
+
+.left-sidebar {
+  left: -300px;
+
+  &.open {
+    left: 0;
+  }
+
+  &__header {
+    background-color: $bg-dark;
+    padding: 20px;
+    @include flex-layout(space-between, center);
+    border-bottom: 1px solid $bg-secondary;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-primary;
+    font-size: 16px;
+  }
+
+  &__close {
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  &__nav {
+    padding: 20px;
+    @include flex-layout(flex-start, stretch, column, 15px);
+  }
+
+  &__link {
+    color: $color-text-secondary;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    &:hover {
+      color: $color-cyan;
+    }
+  }
+}
+
+.cart-sidebar {
+  right: -350px;
+  width: 350px;
+
+  &.open {
+    right: 0;
+  }
+
+  &__header {
+    background-color: $bg-dark;
+    padding: 20px;
+    @include flex-layout(space-between, center);
+    border-bottom: 1px solid $bg-secondary;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-primary;
+    font-size: 16px;
+  }
+
+  &__close {
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  &__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    @include flex-layout(flex-start, stretch, column, 15px);
+  }
+
+  &__footer {
+    background-color: $bg-dark;
+    padding: 20px;
+    border-top: 1px solid $bg-secondary;
+  }
+
+  &__total-row {
+    @include flex-layout(space-between, center);
+    font-weight: bold;
+    color: $color-primary;
+    margin-bottom: 15px;
+  }
+
+  &__checkout {
+    @include btn-green(10px, 100%);
+    font-weight: bold;
+  }
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: none;
+
+  &.open {
+    display: block;
+  }
+}
+
+.empty-cart-msg {
+  color: $color-text-muted;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cart-item-row {
+  @include flex-layout(space-between, center);
+  background-color: $bg-secondary;
+  padding: 10px 15px;
+  border-radius: $radius-md;
+}
+
+.cart-item-title {
+  margin: 0 0 5px 0;
+  font-size: 13px;
+  color: $color-primary;
+}
+
+.cart-item-price {
+  margin: 0;
+  font-size: 12px;
+  color: $color-cyan;
+}
+
+.remove-item-btn {
+  background: transparent;
+  border: none;
+  color: $color-danger;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+// MAIN CONTENT
+.main-container {
+  max-width: $max-width-container;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.game-header-area {
+  margin-bottom: 15px;
+}
+
+.breadcrumbs {
+  color: $color-text-muted;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.main__title {
+  color: $color-primary;
+  font-size: 2.2rem;
+  margin: 0 0 8px 0;
+}
+
+.community-hub-btn {
+  display: inline-block;
+  @include btn-secondary($bg-secondary,$color-text-secondary);
+  padding: 5px 12px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.steam-grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.left-column {
+  @include flex-layout(flex-start, stretch, column, 20px);
+}
+
+.media-gallery {
+  @extend %card-box;
+  padding: 10px;
+}
+
+.main-viewer__bg {
+  width: 100%;
+  height: 400px;
+  @extend %bg-cover-center;
+  border-radius: $radius-sm;
+}
+
+.thumbnails-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.thumb {
+  width: 80px;
+  height: 45px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+
+  &__bg {
+    width: 100%;
+    height: 100%;
+    @extend %bg-cover-center;
+  }
+
+  &--active,
+  &:hover {
+    border-color: $color-cyan;
+    opacity: 1;
+  }
+}
+
+.about-game-box, .system-requirements {
+  @extend %card-box;
+
+  h3 {
+    @extend %section-title;
+  }
+}
+
+.req-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.req-column {
+  flex: 1;
+
+  h4 {
+    color: $color-cyan;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 5px 0;
+    color: $color-text-muted;
+  }
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-box-right {
+  @extend %card-box;
+  padding: 15px;
+  @include flex-layout(flex-start, stretch, column, 12px);
+
+  &__capsule {
+    width: 100%;
+    height: 160px;
+    @extend %bg-cover-center;
+    border-radius: $radius-sm;
+  }
+}
+
+.right-short-desc {
+  font-size: 12px;
+  line-height: 1.4;
+  color: $color-text-secondary;
+  margin: 0;
+}
+
+.meta-row {
+  @include flex-layout(space-between, center);
+  font-size: 11px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 6px 8px;
+  border-radius: $radius-sm;
+}
+
+.review-positive { color: $color-review-positive; }
+.review-mixed { color: $color-review-mixed; }
+.blue-link { color: $color-review-positive; cursor: pointer; }
+
+.tags-box-sidebar h4 {
+  font-size: 11px;
+  color: $color-text-muted;
+  margin-bottom: 8px;
+}
+
+.tags-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  background-color: $bg-secondary;
+  color: $color-cyan;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: $radius-sm;
+}
+
+.dlc-store-section {
+  @extend %card-box;
+  margin-bottom: 20px;
+
+  h3 {
+    @extend %section-title;
+  }
+}
+
+.dlc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.dlc-card {
+  background-color: $bg-dark;
+  border-radius: $radius-md;
+  overflow: hidden;
+  @include flex-layout(space-between, stretch, column);
+  border: 1px solid $bg-secondary;
+
+  &__image {
+    width: 100%;
+    height: 120px;
+    @extend %bg-cover-center;
+  }
+}
+
+.dlc-info {
+  padding: 10px;
+
+  h4 {
+    font-size: 13px;
+    color: $color-primary;
+    margin: 0 0 5px 0;
+  }
+}
+
+.dlc-price {
+  font-size: 13px;
+  color: $color-cyan;
+  font-weight: bold;
+}
+
+.add-to-cart-btn {
+  @include btn-secondary($bg-secondary,$color-primary);
+  padding: 8px;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #3b607d;
+  }
+}
+
+.play-section {
+  @extend %card-box;
+  margin-bottom: 20px;
+  border-left: 5px solid $color-cyan;
+
+  h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: $color-primary;
+  }
+}
+
+.play-bar {
+  @include flex-layout(space-between, center);
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 3px;
+}
+
+button.play-game {
+  @include btn-green(10px 30px);
+  font-weight: bold;
+}
+
+.news {
+  @extend %card-box;
+  margin-bottom: 30px;
+
+  h3 {
+    @extend %section-title;
+  }
+}
+
+.news-item {
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+  padding: 15px;
+  @include flex-layout(flex-start, center, row, 20px);
+  border-radius: 3px;
+
+  &__image {
+    width: 180px;
+    min-width: 180px;
+    height: 110px;
+    @extend %bg-cover-center;
+  }
+}
+
+.news-text {
+  h4 {
+    margin: 0 0 5px 0;
+    color: $color-primary;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+}
+
+footer.footer {
+  text-align: center;
+  padding: 30px;
+  background-color: $bg-darker;
+  color: $color-text-muted;
+  font-size: 12px;
+  border-top: 1px solid $bg-secondary;
+}
+
+// RESPONSIVE
+@media (max-width: 768px) {
+  .steam-grid-layout, .dlc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .req-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  header.main-nav {
+    padding: 0 15px;
+    height: auto;
+    min-height: 70px;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .menu-links {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .right-nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .news-item {
+    flex-direction: column;
+    gap: 10px;
+
+    &__image {
+      width: 100%;
+      height: 180px;
+    }
+  }
+
+  .play-bar {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  button.play-game {
+    width: 100%;
+  }
+
+  .cart-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+
+  .left-sidebar {
+    width: 100%;
+    left: -100%;
+  }
+}
