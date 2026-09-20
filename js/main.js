@@ -1,4 +1,4 @@
-// seleccion de elementos dom
+// Seleccion de elementos dom
 const leftMenuToggle = document.getElementById('leftMenuToggle');
 const leftSidebar = document.getElementById('leftSidebar');
 const closeLeftSidebar = document.getElementById('closeLeftSidebar');
@@ -15,9 +15,10 @@ const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
 const thumbnails = document.querySelectorAll('.thumb');
 const mainViewerImg = document.getElementById('mainViewerImg');
 
+// Lista para almacenar los productos del carrito
 let cart = [];
 
-// galeria interactiva
+// Galeria interactiva
 thumbnails.forEach(thumb => {
     thumb.addEventListener('click', () => {
         const imageSrc = thumb.getAttribute('data-img');
@@ -29,56 +30,78 @@ thumbnails.forEach(thumb => {
     });
 });
 
-// abrir y cerrar menu lateral izquierdo
-leftMenuToggle.addEventListener('click', () => {
-    leftSidebar.classList.add('open');
-    sidebarOverlay.classList.add('open');
-});
-
-closeLeftSidebar.addEventListener('click', closeAllSidebars);
-
-// abrir y cerrar menu del carrito
-cartToggle.addEventListener('click', () => {
-    cartSidebar.classList.add('open');
-    sidebarOverlay.classList.add('open');
-});
-
-closeCart.addEventListener('click', closeAllSidebars);
-
-// overlay para cerrar menus
-sidebarOverlay.addEventListener('click', closeAllSidebars);
-
-function closeAllSidebars() {
-    leftSidebar.classList.remove('open');
-    cartSidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('open');
+// Abrir y cerrar menu lateral izquierdo
+if (leftMenuToggle && leftSidebar) {
+    leftMenuToggle.addEventListener('click', () => {
+        leftSidebar.classList.add('open');
+        sidebarOverlay.classList.add('open');
+    });
 }
 
-// agregar items al carrito
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
-        
-        cart.push({ name, price });
-        updateCartUI();
-        
-        // abrir carrito al agregar
+if (closeLeftSidebar) {
+    closeLeftSidebar.addEventListener('click', closeAllSidebars);
+}
+
+// Abrir y cerrar menu del carrito
+if (cartToggle && cartSidebar) {
+    cartToggle.addEventListener('click', () => {
         cartSidebar.classList.add('open');
         sidebarOverlay.classList.add('open');
     });
+}
+
+if (closeCart) {
+    closeCart.addEventListener('click', closeAllSidebars);
+}
+
+// Overlay para cerrar menus al hacer clic afuera
+if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', closeAllSidebars);
+}
+
+function closeAllSidebars() {
+    if (leftSidebar) leftSidebar.classList.remove('open');
+    if (cartSidebar) cartSidebar.classList.remove('open');
+    if (sidebarOverlay) sidebarOverlay.classList.remove('open');
+}
+
+// Agregar items al carrito
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const name = button.getAttribute('data-name') || 'Producto';
+        const price = parseFloat(button.getAttribute('data-price')) || 0;
+        
+        // Producto al arreglo
+        cart.push({ name, price });
+        
+        updateCartUI();
+        
+        if (cartSidebar && sidebarOverlay) {
+            cartSidebar.classList.add('open');
+            sidebarOverlay.classList.add('open');
+        }
+    });
 });
 
-// renderizar interfaz del carrito
+// Renderizar interfaz del carrito
 function updateCartUI() {
-    cartCountBadge.textContent = cart.length;
+    // Actualiza la burbuja del contador en la barra superior
+    if (cartCountBadge) {
+        cartCountBadge.textContent = cart.length;
+    }
 
+    // Si el carrito esta vacio
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
-        cartTotalPrice.textContent = '$0.00';
+        if (cartItemsContainer) {
+            cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
+        }
+        if (cartTotalPrice) {
+            cartTotalPrice.textContent = '$0.00';
+        }
         return;
     }
 
+    // Si hay elementos, construimos el html
     let html = '';
     let total = 0;
 
@@ -95,10 +118,15 @@ function updateCartUI() {
         `;
     });
 
-    cartItemsContainer.innerHTML = html;
-    cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+    if (cartItemsContainer) {
+        cartItemsContainer.innerHTML = html;
+    }
+    
+    if (cartTotalPrice) {
+        cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+    }
 
-    // evento para eliminar items individualmente
+    // Evento para eliminar elementos del carrito
     const removeButtons = cartItemsContainer.querySelectorAll('.remove-item-btn');
     removeButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {

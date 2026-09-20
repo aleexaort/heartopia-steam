@@ -23,7 +23,7 @@ $radius-sm: 2px;
 $radius-md: 4px;
 
 // MIXINS
-@mixin flex-layout($justify: space-between,$align: center, $direction: row,$gap: 0px) {
+@mixin flex-layout($justify: space-between, $align: center, $direction: row, $gap: 0px) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
@@ -31,7 +31,7 @@ $radius-md: 4px;
   gap: $gap;
 }
 
-@mixin btn-green($padding: 6px 14px,$width: auto) {
+@mixin btn-green($padding: 6px 14px, $width: auto) {
   background-color: $color-green-btn;
   color: $color-primary;
   border: none;
@@ -47,7 +47,7 @@ $radius-md: 4px;
   }
 }
 
-@mixin btn-secondary($bg:$bg-secondary, $color:$color-primary) {
+@mixin btn-secondary($bg: $bg-secondary, $color: $color-primary) {
   background-color: $bg;
   color: $color;
   border: none;
@@ -93,7 +93,7 @@ body {
 // HEADER Y NAV
 header.main-nav {
   background-color: $bg-darker;
-  padding: 0 30px;
+  padding: 0 20px;
   height: 70px;
   @include flex-layout(space-between, center);
   position: sticky;
@@ -102,25 +102,28 @@ header.main-nav {
 
   .nav-container {
     width: 100%;
-    @include flex-layout(space-between, center, row, 15px);
+    max-width: 1200px;
+    margin: 0 auto;
+    @include flex-layout(space-between, center, row, 10px);
   }
 
   .header__logo-container {
     width: 120px;
     height: 35px;
+    min-width: 120px;
     @extend %bg-cover-center;
   }
 
   .menu-links {
     display: flex;
-    gap: 15px;
+    gap: 12px;
   }
 
   .header__link {
     color: #dcdedf;
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     padding: 5px 0;
 
     &--active {
@@ -130,7 +133,7 @@ header.main-nav {
   }
 
   .right-nav {
-    @include flex-layout(flex-end, center, row, 10px);
+    @include flex-layout(flex-end, center, row, 8px);
   }
 }
 
@@ -139,9 +142,9 @@ header.main-nav {
   background: transparent;
   border: none;
   color: $color-text-secondary;
-  font-size: 22px;
+  font-size: 20px;
   cursor: pointer;
-  padding: 5px;
+  padding: 4px;
   display: flex;
   align-items: center;
 
@@ -154,7 +157,7 @@ header.main-nav {
 .search-box {
   background-color: $bg-accent;
   display: inline-flex;
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: 3px;
   align-items: center;
 
@@ -164,7 +167,8 @@ header.main-nav {
     color: $color-primary;
     outline: none;
     font-family: $font-family-base;
-    font-size: 13px;
+    font-size: 12px;
+    width: 110px;
   }
 
   &__submit {
@@ -172,19 +176,20 @@ header.main-nav {
     border: none;
     color: $color-primary;
     cursor: pointer;
+    font-size: 12px;
   }
 }
 
 // Carrito boton
 .cart-btn {
   @include btn-secondary($bg-secondary);
-  padding: 6px 10px;
-  @include flex-layout(center, center, row, 6px);
+  padding: 5px 8px;
+  @include flex-layout(center, center, row, 5px);
   position: relative;
 
   &__icon-container {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     @extend %bg-cover-center;
   }
 }
@@ -193,20 +198,20 @@ header.main-nav {
   background-color: $color-cyan;
   color: $bg-dark;
   font-weight: bold;
-  font-size: 11px;
-  padding: 1px 5px;
+  font-size: 10px;
+  padding: 1px 4px;
   border-radius: 10px;
 }
 
 .install-btn {
-  @include btn-green(6px 14px);
-  font-size: 13px;
+  @include btn-green(5px 10px);
+  font-size: 12px;
 }
 
 .login-link {
   color: #dcdedf;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: lowercase;
 }
 
@@ -397,7 +402,7 @@ header.main-nav {
 
 .community-hub-btn {
   display: inline-block;
-  @include btn-secondary($bg-secondary,$color-text-secondary);
+  @include btn-secondary($bg-secondary, $color-text-secondary);
   padding: 5px 12px;
   text-decoration: none;
   font-size: 12px;
@@ -589,7 +594,7 @@ header.main-nav {
 }
 
 .add-to-cart-btn {
-  @include btn-secondary($bg-secondary,$color-primary);
+  @include btn-secondary($bg-secondary, $color-primary);
   padding: 8px;
   width: 100%;
   font-size: 12px;
@@ -649,16 +654,21 @@ button.play-game {
 }
 
 .news-text {
+  text-align: left;
+  width: 100%;
+
   h4 {
     margin: 0 0 5px 0;
     color: $color-primary;
     font-size: 14px;
+    text-align: left;
   }
 
   p {
     margin: 0;
     font-size: 12px;
     color: $color-text-muted;
+    text-align: left;
   }
 }
 
@@ -708,11 +718,20 @@ footer.footer {
 
   .news-item {
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
 
     &__image {
       width: 100%;
       height: 180px;
+    }
+  }
+
+  .news-text {
+    text-align: left;
+    
+    h4, p {
+      text-align: left;
     }
   }
 
